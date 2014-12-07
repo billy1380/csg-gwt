@@ -13,6 +13,10 @@ import java.util.List;
 //Represents a plane in 3D space.
 public class Plane implements PolygonType {
 
+	// `CSG.Plane.EPSILON` is the tolerance used by `splitPolygon()` to decide if a
+	// point is on the plane.
+	public static final float EPSILON = 1.0e-5f;
+	
 	public Vector normal;
 	public Float w;
 
@@ -20,10 +24,6 @@ public class Plane implements PolygonType {
 		this.normal = normal;
 		this.w = w;
 	}
-
-	// `CSG.Plane.EPSILON` is the tolerance used by `splitPolygon()` to decide if a
-	// point is on the plane.
-	Float EPSILON = 1.0e-5f;
 
 	public static Plane fromPoints(Vector a, Vector b, Vector c) {
 		Vector n = b.minus(a).cross(c.minus(a)).unit();
@@ -79,7 +79,7 @@ public class Plane implements PolygonType {
 				if (ti != FRONT)
 					b.add(ti != BACK ? vi.clone() : vi);
 				if ((ti | tj) == SPANNING) {
-					float t = (this.w - this.normal.dot(vi.pos)) / this.normal.dot(vj.pos.minus(vi.pos));
+					Float t = (this.w - this.normal.dot(vi.pos)) / this.normal.dot(vj.pos.minus(vi.pos));
 					Vertex v = vi.interpolate(vj, t);
 					f.add(v);
 					b.add(v.clone());

@@ -128,6 +128,7 @@ public class Node {
 	public void build(List<Polygon> polygons) {
 		if (polygons.size() == 0)
 			return;
+		
 		if (this.plane == null)
 			this.plane = polygons.get(0).plane.clone();
 
@@ -135,14 +136,18 @@ public class Node {
 		for (int i = 0; i < polygons.size(); i++) {
 			this.plane.splitPolygon(polygons.get(i), this.polygons, this.polygons, front, back);
 		}
+		
 		if (front.size() > 0) {
 			if (this.front == null)
 				this.front = new Node();
+			
 			this.front.build(front);
 		}
+		
 		if (back.size() > 0) {
 			if (this.back == null)
 				this.back = new Node();
+			
 			this.back.build(back);
 		}
 	}
