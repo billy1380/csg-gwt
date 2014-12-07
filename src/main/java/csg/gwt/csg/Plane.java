@@ -44,8 +44,7 @@ public class Plane implements PolygonType {
 	// `coplanarFront` or `coplanarBack` depending on their orientation with
 	// respect to this plane. Polygons in front or in back of this plane go into
 	// either `front` or `back`.
-	public void splitPolygon(Polygon polygon, List<Polygon> coplanarFront,
-			List<Polygon> coplanarBack, List<Polygon> front, List<Polygon> back) {
+	public void splitPolygon(Polygon polygon, List<Polygon> coplanarFront, List<Polygon> coplanarBack, List<Polygon> front, List<Polygon> back) {
 		// Classify each point as well as the entire polygon into one of the above
 		// four classes.
 		int polygonType = 0;
@@ -60,8 +59,7 @@ public class Plane implements PolygonType {
 		// Put the polygon in the correct list, splitting it when necessary.
 		switch (polygonType) {
 		case COPLANAR:
-			(this.normal.dot(polygon.plane.normal) > 0 ? coplanarFront
-					: coplanarBack).add(polygon);
+			(this.normal.dot(polygon.plane.normal) > 0 ? coplanarFront : coplanarBack).add(polygon);
 			break;
 		case FRONT:
 			front.add(polygon);
@@ -75,15 +73,13 @@ public class Plane implements PolygonType {
 			for (int i = 0; i < polygon.vertices.size(); i++) {
 				int j = (i + 1) % polygon.vertices.size();
 				int ti = types.get(i), tj = types.get(j);
-				Vertex vi = polygon.vertices.get(i), vj = polygon.vertices
-						.get(j);
+				Vertex vi = polygon.vertices.get(i), vj = polygon.vertices.get(j);
 				if (ti != BACK)
 					f.add(vi);
 				if (ti != FRONT)
 					b.add(ti != BACK ? vi.clone() : vi);
 				if ((ti | tj) == SPANNING) {
-					float t = (this.w - this.normal.dot(vi.pos))
-							/ this.normal.dot(vj.pos.minus(vi.pos));
+					float t = (this.w - this.normal.dot(vi.pos)) / this.normal.dot(vj.pos.minus(vi.pos));
 					Vertex v = vi.interpolate(vj, t);
 					f.add(v);
 					b.add(v.clone());

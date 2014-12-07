@@ -34,8 +34,7 @@ public class Polygon {
 	public Polygon(List<Vertex> vertices, Map<String, Object> shared) {
 		this.vertices = vertices;
 		this.shared = shared;
-		this.plane = Plane.fromPoints(vertices.get(0).pos, vertices.get(1).pos,
-				vertices.get(2).pos);
+		this.plane = Plane.fromPoints(vertices.get(0).pos, vertices.get(1).pos, vertices.get(2).pos);
 	}
 
 	public Polygon(Vertex... vertex) {

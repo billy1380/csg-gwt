@@ -190,46 +190,27 @@ class Csg {
 	public static Csg cube(Map<String, Object> options) {
 		options = (options == null ? new HashMap<String, Object>() : options);
 		@SuppressWarnings("unchecked")
-		Vector c = new Vector(options.get("center") == null ? Arrays.asList(
-				Float.valueOf(0), Float.valueOf(0), Float.valueOf(0))
+		Vector c = new Vector(options.get("center") == null ? Arrays.asList(Float.valueOf(0), Float.valueOf(0), Float.valueOf(0))
 				: (List<Float>) options.get("center"));
 		@SuppressWarnings("unchecked")
-		List<Float> r = options.get("radius") == null ? Arrays.asList(
-				Float.valueOf(1), Float.valueOf(1), Float.valueOf(1)) : options
-				.get("radius") instanceof List ? (List<Float>) options
-				.get("radius") : Arrays.asList((Float) options.get("radius"),
-				(Float) options.get("radius"), (Float) options.get("radius"));
+		List<Float> r = options.get("radius") == null ? Arrays.asList(Float.valueOf(1), Float.valueOf(1), Float.valueOf(1))
+				: options.get("radius") instanceof List ? (List<Float>) options.get("radius") : Arrays.asList((Float) options.get("radius"),
+						(Float) options.get("radius"), (Float) options.get("radius"));
 
-		List<List<List<Float>>> one = Arrays.asList(
-				Arrays.asList(Arrays.asList(0.0f, 4.0f, 6.0f, 2.0f),
-						Arrays.asList(-1.0f, 0.0f, 0.0f)),
-				Arrays.asList(Arrays.asList(1.0f, 3.0f, 7.0f, 5.0f),
-						Arrays.asList(+1.0f, 0.0f, 0.0f)),
-				Arrays.asList(Arrays.asList(0.0f, 1.0f, 5.0f, 4.0f),
-						Arrays.asList(0.0f, -1.0f, 0.0f)),
-				Arrays.asList(Arrays.asList(2.0f, 6.0f, 7.0f, 3.0f),
-						Arrays.asList(0.0f, +1.0f, 0.0f)),
-				Arrays.asList(Arrays.asList(0.0f, 2.0f, 3.0f, 1.0f),
-						Arrays.asList(0.0f, 0.0f, -1.0f)),
-				Arrays.asList(Arrays.asList(4.0f, 5.0f, 7.0f, 6.0f),
-						Arrays.asList(0.0f, 0.0f, +1.0f)));
+		List<List<List<Float>>> one = Arrays.asList(Arrays.asList(Arrays.asList(0.0f, 4.0f, 6.0f, 2.0f), Arrays.asList(-1.0f, 0.0f, 0.0f)),
+				Arrays.asList(Arrays.asList(1.0f, 3.0f, 7.0f, 5.0f), Arrays.asList(+1.0f, 0.0f, 0.0f)),
+				Arrays.asList(Arrays.asList(0.0f, 1.0f, 5.0f, 4.0f), Arrays.asList(0.0f, -1.0f, 0.0f)),
+				Arrays.asList(Arrays.asList(2.0f, 6.0f, 7.0f, 3.0f), Arrays.asList(0.0f, +1.0f, 0.0f)),
+				Arrays.asList(Arrays.asList(0.0f, 2.0f, 3.0f, 1.0f), Arrays.asList(0.0f, 0.0f, -1.0f)),
+				Arrays.asList(Arrays.asList(4.0f, 5.0f, 7.0f, 6.0f), Arrays.asList(0.0f, 0.0f, +1.0f)));
 
 		List<Polygon> polygons = new ArrayList<Polygon>();
 
 		for (List<List<Float>> two : one) {
 			List<Vertex> vertices = new ArrayList<Vertex>();
 			for (Float three : two.get(0)) {
-				Vector pos = new Vector(c.x
-						+ r.get(0)
-						* (2.0f * (three.intValue() & 1) != 0 ? 1.0f
-								: 0.0f - 1.0f),
-						c.y
-								+ r.get(1)
-								* (2.0f * (three.intValue() & 2) != 0 ? 1.0f
-										: 0.0f - 1), c.z
-								+ r.get(2)
-								* (2.0f * (three.intValue() & 4) != 0 ? 1.0f
-										: 0.0f - 1));
+				Vector pos = new Vector(c.x + r.get(0) * (2.0f * (three.intValue() & 1) != 0 ? 1.0f : 0.0f - 1.0f), c.y + r.get(1)
+						* (2.0f * (three.intValue() & 2) != 0 ? 1.0f : 0.0f - 1), c.z + r.get(2) * (2.0f * (three.intValue() & 4) != 0 ? 1.0f : 0.0f - 1));
 				Vertex v = new Vertex(pos, new Vector(two.get(1)));
 				vertices.add(v);
 			}
@@ -257,15 +238,11 @@ class Csg {
 		options = (options == null ? new HashMap<String, Object>() : options);
 
 		@SuppressWarnings("unchecked")
-		Vector c = new Vector(options.get("center") == null ? Arrays.asList(
-				Float.valueOf(0), Float.valueOf(0), Float.valueOf(0))
+		Vector c = new Vector(options.get("center") == null ? Arrays.asList(Float.valueOf(0), Float.valueOf(0), Float.valueOf(0))
 				: (List<Float>) options.get("center"));
-		Float r = options.get("radius") == null ? Float.valueOf(1)
-				: (Float) options.get("radius");
-		Float slices = options.get("slices") == null ? Float.valueOf(16)
-				: (Float) options.get("slices");
-		Float stacks = options.get("stacks") == null ? Float.valueOf(8)
-				: (Float) options.get("stacks");
+		Float r = options.get("radius") == null ? Float.valueOf(1) : (Float) options.get("radius");
+		Float slices = options.get("slices") == null ? Float.valueOf(16) : (Float) options.get("slices");
+		Float stacks = options.get("stacks") == null ? Float.valueOf(8) : (Float) options.get("stacks");
 		List<Polygon> polygons = new ArrayList<Polygon>();
 		List<Vertex> vertices;
 
@@ -284,13 +261,10 @@ class Csg {
 		return Csg.fromPolygons(polygons);
 	};
 
-	private static void vertex(Float theta, Float phi, Float r, Vector c,
-			List<Vertex> vertices) {
+	private static void vertex(Float theta, Float phi, Float r, Vector c, List<Vertex> vertices) {
 		theta = (float) (theta * Math.PI * 2.0f);
 		phi = (float) (phi * Math.PI);
-		Vector dir = new Vector((float) (Math.cos(theta) * Math.sin(phi)),
-				(float) Math.cos(phi),
-				(float) (Math.sin(theta) * Math.sin(phi)));
+		Vector dir = new Vector((float) (Math.cos(theta) * Math.sin(phi)), (float) Math.cos(phi), (float) (Math.sin(theta) * Math.sin(phi)));
 		vertices.add(new Vertex(c.plus(dir.times(r)), dir));
 	}
 
@@ -310,23 +284,18 @@ class Csg {
 		options = (options == null ? new HashMap<String, Object>() : options);
 
 		@SuppressWarnings("unchecked")
-		Vector s = new Vector(options.get("start") == null ? Arrays.asList(
-				Float.valueOf(0), Float.valueOf(-1), Float.valueOf(0))
+		Vector s = new Vector(options.get("start") == null ? Arrays.asList(Float.valueOf(0), Float.valueOf(-1), Float.valueOf(0))
 				: (List<Float>) options.get("start"));
 		@SuppressWarnings("unchecked")
-		Vector e = new Vector(options.get("end") == null ? Arrays.asList(
-				Float.valueOf(0), Float.valueOf(1), Float.valueOf(0))
+		Vector e = new Vector(options.get("end") == null ? Arrays.asList(Float.valueOf(0), Float.valueOf(1), Float.valueOf(0))
 				: (List<Float>) options.get("end"));
 		Vector ray = e.minus(s);
-		Float r = options.get("radius") == null ? Float.valueOf(1)
-				: (Float) options.get("radius");
-		Float slices = options.get("slices") == null ? Float.valueOf(16)
-				: (Float) options.get("slices");
+		Float r = options.get("radius") == null ? Float.valueOf(1) : (Float) options.get("radius");
+		Float slices = options.get("slices") == null ? Float.valueOf(16) : (Float) options.get("slices");
 
 		Vector axisZ = ray.unit();
 		boolean isY = (Math.abs(axisZ.y) > 0.5);
-		Vector axisX = new Vector(isY ? 1.0f : 0.0f, isY ? 0.0f : 1.0f, 0.0f)
-				.cross(axisZ).unit();
+		Vector axisX = new Vector(isY ? 1.0f : 0.0f, isY ? 0.0f : 1.0f, 0.0f).cross(axisZ).unit();
 		Vector axisY = axisX.cross(axisZ).unit();
 		Vertex start = new Vertex(s, axisZ.negated());
 		Vertex end = new Vertex(e, axisZ.unit());
@@ -334,31 +303,20 @@ class Csg {
 
 		for (int i = 0; i < slices; i++) {
 			Float t0 = i / slices, t1 = (i + 1) / slices;
-			polygons.add(new Polygon(start, point(0.0f, t0, -1.0f, s, axisX,
-					axisY, axisZ, ray, r), point(0.0f, t1, -1.0f, s, axisX,
-					axisY, axisZ, ray, r)));
-			polygons.add(new Polygon(point(0.0f, t1, 0.0f, s, axisX, axisY,
-					axisZ, ray, r), point(0.0f, t0, 0.0f, s, axisX, axisY,
-					axisZ, ray, r), point(1.0f, t0, 0.0f, s, axisX, axisY,
-					axisZ, ray, r), point(1.0f, t1, 0.0f, s, axisX, axisY,
-					axisZ, ray, r)));
-			polygons.add(new Polygon(end, point(1.0f, t1, 1.0f, s, axisX,
-					axisY, axisZ, ray, r), point(1.0f, t0, 1.0f, s, axisX,
-					axisY, axisZ, ray, r)));
+			polygons.add(new Polygon(start, point(0.0f, t0, -1.0f, s, axisX, axisY, axisZ, ray, r), point(0.0f, t1, -1.0f, s, axisX, axisY, axisZ, ray, r)));
+			polygons.add(new Polygon(point(0.0f, t1, 0.0f, s, axisX, axisY, axisZ, ray, r), point(0.0f, t0, 0.0f, s, axisX, axisY, axisZ, ray, r), point(1.0f,
+					t0, 0.0f, s, axisX, axisY, axisZ, ray, r), point(1.0f, t1, 0.0f, s, axisX, axisY, axisZ, ray, r)));
+			polygons.add(new Polygon(end, point(1.0f, t1, 1.0f, s, axisX, axisY, axisZ, ray, r), point(1.0f, t0, 1.0f, s, axisX, axisY, axisZ, ray, r)));
 		}
 
 		return Csg.fromPolygons(polygons);
 	};
 
-	private static Vertex point(Float stack, Float slice, Float normalBlend,
-			Vector s, Vector axisX, Vector axisY, Vector axisZ, Vector ray,
-			Float r) {
+	private static Vertex point(Float stack, Float slice, Float normalBlend, Vector s, Vector axisX, Vector axisY, Vector axisZ, Vector ray, Float r) {
 		Float angle = (float) (slice * Math.PI * 2.0f);
-		Vector out = axisX.times((float) Math.cos(angle)).plus(
-				axisY.times((float) Math.sin(angle)));
+		Vector out = axisX.times((float) Math.cos(angle)).plus(axisY.times((float) Math.sin(angle)));
 		Vector pos = s.plus(ray.times(stack)).plus(out.times(r));
-		Vector normal = out.times(1 - Math.abs(normalBlend)).plus(
-				axisZ.times(normalBlend));
+		Vector normal = out.times(1 - Math.abs(normalBlend)).plus(axisZ.times(normalBlend));
 		return new Vertex(pos, normal);
 	}
 

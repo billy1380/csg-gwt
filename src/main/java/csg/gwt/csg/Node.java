@@ -133,8 +133,7 @@ public class Node {
 
 		List<Polygon> front = new ArrayList<Polygon>(), back = new ArrayList<Polygon>();
 		for (int i = 0; i < polygons.size(); i++) {
-			this.plane.splitPolygon(polygons.get(i), this.polygons,
-					this.polygons, front, back);
+			this.plane.splitPolygon(polygons.get(i), this.polygons, this.polygons, front, back);
 		}
 		if (front.size() > 0) {
 			if (this.front == null)

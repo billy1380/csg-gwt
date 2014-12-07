@@ -38,7 +38,6 @@ public class Vertex {
 	// interpolating all properties using a parameter of `t`. Subclasses should
 	// override this to interpolate additional properties.
 	public Vertex interpolate(Vertex other, Float t) {
-		return new Vertex(this.pos.lerp(other.pos, t), this.normal.lerp(
-				other.normal, t));
+		return new Vertex(this.pos.lerp(other.pos, t), this.normal.lerp(other.normal, t));
 	}
 }
